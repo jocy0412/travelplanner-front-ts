@@ -5,7 +5,7 @@ interface Objectprops {
 }
 
 interface Mapsprops {
-    path: Objectprops; // path의 위도, 경도값은 반대로 들어감
+    path: Objectprops; // path의 위도, 경도값은 반대로 들어가 있음
     travelRoute: number[][];
 }
 
@@ -18,8 +18,6 @@ const Maps = ({ path, travelRoute }: Mapsprops) => {
 
         const startLat = travelRoute[0][0];
         const startLng = travelRoute[0][1];
-
-        console.log(startLat, startLng);
 
         // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
         const location = new naver.maps.LatLng(startLat, startLng);
@@ -71,7 +69,9 @@ const Maps = ({ path, travelRoute }: Mapsprops) => {
             strokeOpacity: 0.7,
             strokeWeight: 5,
         });
-    });
+
+        // console.log("travelRoute, path 변경으로 인한 변경");
+    }, [travelRoute, path]);
 
     const mapStyle = {
         width: "100%",

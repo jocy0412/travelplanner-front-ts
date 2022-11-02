@@ -185,13 +185,11 @@ code {
     }
 
     &.button3 {
-        border-color: #51abf3;
         background: #51abf3;
         color: #fff;
     }
 
     &.button4 {
-        border-color: #fae100;
         background: #fae100;
         color: #fff;
     }
@@ -378,8 +376,39 @@ code {
     margin: 0 auto;
 
     .left__section {
-        width: 300px;
+        width: 350px;
         border-right: 2px solid #333;
+
+        .box__search {
+            display: flex;
+            padding: 10px 20px;
+            border-bottom: 1px solid #000;
+            .input {
+                flex: 1;
+                height: 40px;
+            }
+            .button {
+                height: 40px;
+                line-height: 12px;
+            }
+        }
+
+        .list__route {
+            .list__item {
+                padding: 10px 20px;
+                border-bottom: 1px solid #000;
+
+                .text__title {
+                    font-size: 18px;
+                    font-weight: 700;
+                    margin-bottom: 6px;
+                }
+
+                .text__address {
+                    font-size: 16px;
+                }
+            }
+        }
     }
 
     .right__section {
@@ -387,7 +416,7 @@ code {
     }
 
     .map__area {
-        height: 400px;
+        height: 500px;
         background-color: pink;
     }
 }
