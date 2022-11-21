@@ -287,6 +287,14 @@ code {
     }
 }
 
+.list__title {
+    padding: 10px 0;
+    border-bottom: 1px solid #000;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
 .section__login {
     width: 460px;
     margin: 0 auto;
@@ -376,7 +384,7 @@ code {
     margin: 0 auto;
 
     .left__section {
-        width: 350px;
+        width: 400px;
         border-right: 2px solid #333;
 
         .box__search {
@@ -395,8 +403,50 @@ code {
 
         .list__route {
             .list__item {
-                padding: 10px 20px;
+                padding: 10px 14px;
                 border-bottom: 1px solid #000;
+
+                .box__flex {
+                    display: flex;
+                    align-items: center;
+
+                    .box__desc {
+                        flex: 1;
+                        min-width: 190px;
+                    }
+                }
+                .icon__sort {
+                    position: relative;
+                    width: 24px;
+                    height: 2px;
+                    margin-right: 10px;
+                    background-color: #000;
+                    &::before,
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        width: 100%;
+                        height: 2px;
+                        background-color: #000;
+                    }
+                    &::before {
+                        top: -6px;
+                    }
+                    &::after {
+                        top: 6px;
+                    }
+                }
+                .icon__number {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 10px;
+                    line-height: 30px;
+                    border-radius: 50%;
+                    text-align: center;
+                    background-color: orange;
+                    font-size: 16px;
+                    font-weight: 700;
+                }
 
                 .text__title {
                     font-size: 18px;
@@ -406,6 +456,10 @@ code {
 
                 .text__address {
                     font-size: 16px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin-right: 10px;
                 }
             }
         }

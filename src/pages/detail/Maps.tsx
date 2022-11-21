@@ -62,6 +62,11 @@ const Maps = ({ path, travelRoute }: Mapsprops) => {
             polyPaths.push(otherLine);
         }
 
+        if (travelRoute.length === 1) {
+            console.log("travelRoute 1개면 PolyLine 지우기");
+            polyPaths.length = 0;
+        }
+
         new naver.maps.Polyline({
             map,
             path: polyPaths,
