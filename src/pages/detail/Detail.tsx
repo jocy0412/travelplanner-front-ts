@@ -17,6 +17,13 @@ interface apiInfo {
     title: string;
 }
 
+interface dbRoute {
+    title: string;
+    address: string;
+    lat: string;
+    lng: string;
+}
+
 const getMapInfo = async (start: string, goal: string, waypoints: string) => {
     const paramOption = "trafast";
     const paramConfig = {
@@ -44,14 +51,10 @@ const getMapInfo = async (start: string, goal: string, waypoints: string) => {
 const Detail = () => {
     const searchInput = useRef<HTMLInputElement>(null);
     const [searchValue, setSearchValue] = useState<string>("");
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setSearchValue(value);
-    };
 
     const [searchList, setSearchList] = useState<apiInfo[] | undefined>([]);
 
-    const [plan, setPlan] = useState([
+    const [plan, setPlan] = useState<dbRoute[] | undefined>([
         {
             title: "NAVER",
             address: "경기도 성남시 분당구 정자동 178-4",
@@ -78,17 +81,27 @@ const Detail = () => {
         },
     ]);
 
-    useEffect(() => {
-        const arr: number[][] = [];
-        plan.forEach((e, i: number) => {
-            arr[i] = [Number(e.lat), Number(e.lng)];
-        });
-        setTravelRoute(arr);
-    }, [plan]);
+    const [center, setCenter] = useState<naver.maps.LatLng | undefined>();
+    // polyLine 상태값
+    const [polyPath, setPolyPath] = useState([]);
+
+    const [travelRoute, setTravelRoute] = useState<number[][] | undefined>([[37.3588517, 127.1052366]]);
+
+    if (plan && plan.length) {
+        useEffect(() => {
+            const arr: number[][] = [];
+            plan.forEach((e, i: number) => {
+                arr[i] = [Number(e.lat), Number(e.lng)];
+            });
+            setTravelRoute(arr);
+            setCenter(new naver.maps.LatLng(Number(plan[0].lat), Number(plan[0].lng)));
+        }, [plan]);
+    } else {
+        setCenter(new naver.maps.LatLng(37.3588517, 127.1052366));
+    }
 
     const searchLocation = async () => {
         const value = searchValue;
-        console.log(value);
 
         const paramConfig = {
             // withCredentials: true,
@@ -115,24 +128,24 @@ const Detail = () => {
         }
     };
 
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setSearchValue(value);
+    };
+
     const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key == "Enter") {
             searchLocation();
         }
     };
 
-    const [path, setPath] = useState([]);
+    // if (plan.length > 0) {
+    //     setCenter(new naver.maps.LatLng(Number(plan[0].lat), Number(plan[0].lng)));
+    // } else {
+    //     // setCenter(new naver.maps.LatLng(37.3588517, 127.1052366));
+    // }
 
-    // const route: number[][] = [
-    //     [37.358408, 127.1059342],
-    //     [37.356808, 127.1192342],
-    //     [37.369708, 127.1116342],
-    //     [37.363718, 127.1065342],
-    // ];
-
-    const [travelRoute, setTravelRoute] = useState<number[][]>([[37.3588517, 127.1052366]]);
-
-    if (travelRoute) {
+    if (travelRoute && travelRoute.length > 0) {
         const start = travelRoute ? `${travelRoute[0][1]},${travelRoute[0][0]}` : `${[37.3588517, 127.1052366]}`;
 
         useEffect(() => {
@@ -150,12 +163,14 @@ const Detail = () => {
                 const res: Promise<any> = getMapInfo(start, goal, waypoints);
 
                 res.then((value) => {
-                    setPath(value);
+                    setPolyPath(value);
                 });
             }
         }, [travelRoute]);
     } else {
         console.log(travelRoute);
+        setTravelRoute([[37.3588517, 127.1052366]]);
+
         console.log("travelRoute 빈 값!");
     }
 
@@ -184,7 +199,7 @@ const Detail = () => {
                 </div>
                 <div className="right__section">
                     <div className="map__area">
-                        <Maps path={path} travelRoute={travelRoute} />
+                        <Maps polyPath={polyPath} travelRoute={travelRoute} center={center} />
                     </div>
                     <div className="search__bar">
                         <input className="input" />

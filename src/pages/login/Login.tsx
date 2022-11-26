@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
+import { KAKAO_AUTH_URL } from "../common/OAuth";
 
 const Login = () => {
     const navigate = useNavigate();
+
+    // const handleLogin = () => {
+    //     window.location.href = KAKAO_AUTH_URL;
+    // };
 
     return (
         <>
@@ -16,9 +21,22 @@ const Login = () => {
                     <input type="password" placeholder="비밀번호" title="password" name="password" />
                 </div>
                 <div className="box__button">
-                    <Button primary>Travel Planner 로그인</Button>
-                    <Button background="#fae100" color="white">
-                        카카오로 계정으로 로그인
+                    <a href={KAKAO_AUTH_URL}>
+                        <Button background="#fae100" color="white">
+                            카카오로 계정으로 로그인
+                        </Button>
+                    </a>
+                    {/* <Button background="orange" color="white">
+                        <a href={KAKAO_AUTH_URL}>카카오 로그아웃</a>
+                    </Button> */}
+                    <Button
+                        background="orange"
+                        color="white"
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    >
+                        테스트
                     </Button>
                 </div>
                 <ul className="list__login-menu">
@@ -30,7 +48,7 @@ const Login = () => {
                                 navigate("/");
                             }}
                         >
-                            회원가입
+                            버튼1
                         </Button>
                     </li>
                 </ul>

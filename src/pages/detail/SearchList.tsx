@@ -40,7 +40,12 @@ export default ({ searchList, setSearchList, plan, setPlan }: any) => {
                             <li className="list__item" key={index}>
                                 <div className="box__flex">
                                     <div className="icon__number">{index + 1}</div>
-                                    <div className="box__desc">
+                                    <div
+                                        className="box__desc"
+                                        onClick={() => {
+                                            console.log("클릭!!");
+                                        }}
+                                    >
                                         <h3 className="text__title">{title.replace(/<b>|<\/b>|&amp;/g, "")}</h3>
                                         <p className="text__address">{address}</p>
                                         <p className="text">카테고리 : {category.split(/>/g)[1]}</p>

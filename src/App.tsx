@@ -3,16 +3,17 @@ import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Main from "./pages/main/Main";
 import Detail from "./pages/detail/Detail";
-// import Maps from "./pages/detail/Maps";
 import Login from "./pages/login/Login";
 import Sign from "./pages/sign/Sign";
 import Button from "./pages/common/Button";
+import OAuth2RedirectHandler from "./pages/common/OAuth2RedirectHandler";
 
 function App() {
     return (
         <div className="App">
             <Routes>
                 <Route path="/" element={<Main />} />
+                <Route path="/oauth/callback/kakao" element={<OAuth2RedirectHandler />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/detail" element={<Detail />} />
                 <Route path="/signup" element={<Sign />} />
