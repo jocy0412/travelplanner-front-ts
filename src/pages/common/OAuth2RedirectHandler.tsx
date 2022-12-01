@@ -1,43 +1,20 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import qs from "qs";
 
-const OAuth2RedirectHandler = (props: any) => {
-    const [acessToken, setAcessToken] = useState("아직 없음");
-
+const OAuth2RedirectHandler = () => {
     const code = new URL(window.location.href).searchParams.get("code");
 
-    const headers = {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-    };
-    const uri = "https://kauth.kakao.com/oauth/token";
-    const data = qs.stringify({
-        grant_type: "authorization_code",
-        client_id: process.env.REACT_APP_KAKAO_CLIENT_ID,
-        redirect_uri: "http://localhost:3000/oauth/callback/kakao",
-        code,
-    });
-
+    // front에 verify code 전달을 통한 토큰 정보 받기
     (async () => {
         try {
             const response = await axios({
-                method: "post",
-                headers,
-                url: uri,
-                data,
-            });
-            const token = response.data.access_token;
-
-            const result = await axios({
-                method: "post",
-                url: "http://localhost:8080/oauth/callback/kakao",
-                data: {
-                    token,
+                method: "GET",
+                url: "https://localhost:8000/oauth/callback/kakao",
+                params: {
+                    code,
                 },
+                withCredentials: true,
             });
-            console.log(response.data);
-            console.log(result.data);
-            // window.location.replace("/");
+            console.log(response);
         } catch (error) {
             console.log(error);
         }

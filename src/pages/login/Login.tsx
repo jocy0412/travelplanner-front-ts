@@ -5,10 +5,6 @@ import { KAKAO_AUTH_URL } from "../common/OAuth";
 const Login = () => {
     const navigate = useNavigate();
 
-    // const handleLogin = () => {
-    //     window.location.href = KAKAO_AUTH_URL;
-    // };
-
     return (
         <>
             <div className="section__login">
