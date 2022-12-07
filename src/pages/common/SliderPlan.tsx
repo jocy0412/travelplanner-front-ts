@@ -24,7 +24,7 @@ interface sliderProps {
     items: SlideItems[];
 }
 
-function SliderPlan({ className, autoplay = true, speed = 300, loop = true, items }: sliderProps) {
+const SliderPlan = ({ className, autoplay = true, speed = 300, loop = true, items }: sliderProps) => {
     const arr = items;
     const settings = useMemo<Settings>(
         () => ({
@@ -56,6 +56,6 @@ function SliderPlan({ className, autoplay = true, speed = 300, loop = true, item
             </Slider>
         </>
     );
-}
+};
 
 export default SliderPlan;

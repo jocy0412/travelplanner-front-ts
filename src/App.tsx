@@ -1,10 +1,9 @@
-import React from "react";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Main from "./pages/main/Main";
 import Detail from "./pages/detail/Detail";
 import Login from "./pages/login/Login";
-import Sign from "./pages/sign/Sign";
+import Myplan from "./pages/myplan/Myplan";
 import Button from "./pages/common/Button";
 import OAuth2RedirectHandler from "./pages/common/OAuth2RedirectHandler";
 
@@ -15,8 +14,8 @@ function App() {
                 <Route path="/" element={<Main />} />
                 <Route path="/oauth/callback/kakao" element={<OAuth2RedirectHandler />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/myplan" element={<Myplan />} />
                 <Route path="/detail" element={<Detail />} />
-                <Route path="/signup" element={<Sign />} />
                 <Route
                     path="/buttton"
                     element={
