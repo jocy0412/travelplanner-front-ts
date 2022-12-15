@@ -1,6 +1,7 @@
 import SliderPlan from "../common/SliderPlan";
 import Header from "../common/Header";
 import Footer from "../common/Footer";
+import { Link } from "react-router-dom";
 
 interface itemsProps {
     item: string;
@@ -55,6 +56,21 @@ const Main = () => {
         <>
             <Header />
             <div className="section">
+                <div className="box__title">
+                    <h3 className="text__title">여행을 떠나보아요!</h3>
+                </div>
+                <ul className="list__trip">
+                    <li className="list__item list__item--bg">
+                        <Link to="/create">
+                            <span className="text__desc">여행경로 만들기</span>
+                        </Link>
+                    </li>
+                    <li className="list__item">
+                        <Link to="/myplan">
+                            <span className="text__desc">내 여행경로</span>
+                        </Link>
+                    </li>
+                </ul>
                 <div className="box__title">
                     <h3 className="text__title">추천 여행이 돌아왔어요!</h3>
                 </div>

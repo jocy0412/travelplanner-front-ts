@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 interface apiInfo {
     address: string;
@@ -11,16 +12,31 @@ interface apiInfo {
     title: string;
 }
 
-export default ({ searchList, setSearchList, plan, setPlan }: any) => {
-    const onAddPath = (title: string, address: string, latLng: naver.maps.LatLng) => {
+const SearchList = ({ searchList, setSearchList, planId, plan, setPlan }: any) => {
+    const onAddPath = async (title: string, address: string, latLng: naver.maps.LatLng) => {
         const planResult = JSON.parse(JSON.stringify(plan));
-        planResult.push({ title, address, lat: latLng.y, lng: latLng.x });
+        console.log("planResult.length");
+        const order = planResult[planResult.length - 1].order + 1;
+        console.log(order);
+        planResult.push({ planId, order, title, address, lat: latLng.y, lng: latLng.x });
         setPlan(planResult);
+        const response = await axios({
+            method: "POST",
+            url: "https://localhost:8000/plan/add",
+            params: {
+                planId,
+                order,
+                address,
+                title,
+                lat: latLng.y,
+                lng: latLng.x,
+            },
+        });
+        console.log(response);
+
         setSearchList([]);
     };
-    useEffect(() => {
-        console.log(plan);
-    }, [plan]);
+
     return (
         <>
             {Array.isArray(searchList) && searchList.length === 0 ? null : (
@@ -74,3 +90,5 @@ export default ({ searchList, setSearchList, plan, setPlan }: any) => {
         </>
     );
 };
+
+export default SearchList;

@@ -18,11 +18,11 @@ const Maps = ({ polyPath, travelRoute, center }: Mapsprops) => {
         if (!mapElement.current || !naver) return;
 
         // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
-        const location = center;
+        const centerLocation = center;
 
         const mapOptions: naver.maps.MapOptions = {
-            center: location,
-            zoom: 14,
+            center: centerLocation,
+            zoom: 11,
             zoomControl: true,
             zoomControlOptions: {
                 position: naver.maps.Position.TOP_RIGHT,
@@ -36,7 +36,7 @@ const Maps = ({ polyPath, travelRoute, center }: Mapsprops) => {
         if (travelRoute) {
             for (let i = 0; i < travelRoute.length; i++) {
                 const icon = {
-                    url: "http://localhost:3000/sp_pins_spot_v3.png",
+                    url: "https://localhost:3000/sp_pins_spot_v3.png",
                     size: new naver.maps.Size(24, 37),
                     anchor: new naver.maps.Point(12, 37),
                     origin: new naver.maps.Point(i * 29, 0),
@@ -65,6 +65,10 @@ const Maps = ({ polyPath, travelRoute, center }: Mapsprops) => {
         if (travelRoute && travelRoute.length === 1) {
             console.log("travelRoute 1개면 PolyLine 지우기");
             polyPaths.length = 0;
+        }
+
+        if (travelRoute && travelRoute.length === 0) {
+            console.log("travelRoute 1개면 PolyLine 지우기");
         }
 
         new naver.maps.Polyline({

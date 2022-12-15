@@ -65,21 +65,10 @@ const Header = () => {
     return (
         <div className="header">
             <div className="header__inner">
-                <h1 className="icon__logo">
-                    <Link to="/">Travel Planner</Link>
-                </h1>
+                <Link to="/">
+                    <h1 className="icon__logo">Travel Planner</h1>
+                </Link>
                 <ul className="list__top-menu">
-                    <li className="list__item">
-                        {swtich === false ? (
-                            <Link to="/login" className="link__text">
-                                Login
-                            </Link>
-                        ) : (
-                            <button type="button" onClick={logout}>
-                                Logout
-                            </button>
-                        )}
-                    </li>
                     <li className="list__item">
                         <Link to="/myplan" className="link__text">
                             내 여행경로
@@ -91,9 +80,15 @@ const Header = () => {
                         </Link>
                     </li>
                     <li className="list__item">
-                        <Link to="/mypage" className="link__text">
-                            My Page
-                        </Link>
+                        {swtich === false ? (
+                            <Link to="/login" className="link__text">
+                                Login
+                            </Link>
+                        ) : (
+                            <button type="button" onClick={logout}>
+                                Logout
+                            </button>
+                        )}
                     </li>
                 </ul>
             </div>
