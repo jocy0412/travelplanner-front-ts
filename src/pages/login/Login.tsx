@@ -12,8 +12,11 @@ const Login = () => {
         <>
             <div className="section__login">
                 <div className="logo__travel">
-                    <span className="for-a11y">Travel Planner</span>
-                    <img src="https://dffoxz5he03rp.cloudfront.net/icons/logo_mrt_web.svg" alt="logo" />
+                    <img
+                        src="https://myawstravel.s3.ap-northeast-2.amazonaws.com//image/earth_1671289940398.png"
+                        alt="logo"
+                    />
+                    <h1 className="text__service">TravelPlanner</h1>
                 </div>
                 <div className="box__button">
                     <Button onClick={kakaoLogin} background="#fae100" color="black">

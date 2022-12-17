@@ -358,7 +358,11 @@ code {
 
     .logo__travel {
         margin-bottom: 20px;
-
+        .text__service {
+            font-size: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
         img {
             display: block;
             width: 220px;
